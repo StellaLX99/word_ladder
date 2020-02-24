@@ -96,5 +96,5 @@ def _adjacent(word1, word2):
                 df=df+1 #keep adding one
         if df ==1:#needs to only have 1 differrence
             return True
-         else:
+        else:
             return False 
