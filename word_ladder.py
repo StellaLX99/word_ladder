@@ -67,12 +67,12 @@ def verify_word_ladder(ladder):
     otherwise returns False.
     '''
 
-    if ladder==[]: # it has to have multiple words to start with,cannot be empt 
+    if ladder == []: # it has to have multiple words to start with,cannot be empt 
         return False
     for i in range(len(ladder)-1):#given this range
-        if _adjacent (ladder[i],ladder[i+1])is False:# using the helper function to see if only one difference exists between the words that are next to each other
-                return False
-        return True 
+        if not  _adjacent (ladder[i],ladder[i+1]):# using the helper function to see if only one difference exists between the words that are next to each other
+            return False
+    return True 
 
 def _adjacent(word1, word2):
     '''
