@@ -67,13 +67,13 @@ def verify_word_ladder(ladder):
     otherwise returns False.
     '''
 
-    if len(ladder)==0: # it has to have multiple words to start with 
+    if len(ladder) == 0: # it has to have multiple words to start with 
         return False
     else:
         for i in range(len(ladder)-1):#given this range
             if _adjacent(ladder[i],ladder[i+1])is False:# using the helper function to see if only one difference exists between the words that are next to each other
                 return False
-            return True 
+        return True 
 
 def _adjacent(word1, word2):
     '''
