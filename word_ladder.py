@@ -29,7 +29,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
                         if _adjacent(newwords[i-1],newwords[i+1]):
                                 newwords.pop(i) #get rid of the other words that is not at first and end 
                     return newwords
-                q.appendleft(newwords)
+                q.append(newwords)
                 wholewords.remove(word)
     return None 
 
