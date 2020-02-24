@@ -1,9 +1,10 @@
 #!/bin/python3
 from collections import deque
-from copy import deepcopy
-#filename= dictionary_file='words5.dict'
-with open (dictionary_file) as dic:
-    wholewords= dic.read().spilt("\n")
+from copy import copy,deepcopy
+filename= dictionary_file='words5.dict'
+with open (filename) as dic:
+    wholewords= dic.read().split("\n")
+    wholewords=set(wholewords)
 #print('words=',words) 
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
 # stack=[]creates a list/stack that is empty
@@ -19,18 +20,18 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         return False 
     while len(q)!=0:
         topstack=q.popleft() #queue is first in first out, from left to right
-        for word in wholewords:
+        for word in set(wholewords):
             if _adjacent(topstack[-1],word): #run to see if only 1 difference, and next to each other
-                newwords=copy.deepcopy(topstack) #we want to store it and go on
+                newwords=deepcopy(topstack) #we want to store it and go on
                 newwords.append(word) #add the rest of it in
-                if end_word==word #here we finish basically
+                if end_word==word: #here we finish basically
                     for i in range(1, len(newwords)-2): # we start looping from the second word to the last second word
                         if _adjacent(newwords[i-1],newwords[i+1]):
                                 newwords.pop(i) #get rid of the other words that is not at first and end 
                     return newwords
                 q.appendleft(newwords)
                 wholewords.remove(word)
-     return None 
+    return None 
 
     '''
     Returns a list satisfying the following properties:
@@ -66,11 +67,11 @@ def verify_word_ladder(ladder):
     otherwise returns False.
     '''
 
-    if len(laddder)==0 # it has to have multiple words to start with 
+    if len(laddder)==0: # it has to have multiple words to start with 
         return False
     else:
         for i in range(len(ladder)-1):#given this range
-            if_adjacent(ladder[i],ladder[i+1]):# using the helper function to see if only one difference exists between the words that are next to each other
+            if _adjacent(ladder[i],ladder[i+1]):# using the helper function to see if only one difference exists between the words that are next to each other
                 return True # that is what we want 
             else:
                 return False
