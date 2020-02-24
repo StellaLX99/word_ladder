@@ -67,7 +67,7 @@ def verify_word_ladder(ladder):
     otherwise returns False.
     '''
 
-    if len(laddder)==0: # it has to have multiple words to start with 
+    if len(ladder)==0: # it has to have multiple words to start with 
         return False
     else:
         for i in range(len(ladder)-1):#given this range
