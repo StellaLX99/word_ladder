@@ -71,7 +71,7 @@ def verify_word_ladder(ladder):
         return False
     else:
         for i in range(len(ladder)-1):#given this range
-            if _adjacent(ladder[i],ladder[i+1])is False:# using the helper function to see if only one difference exists between the words that are next to each other
+            if _adjacent (ladder[i],ladder[i+1])is False:# using the helper function to see if only one difference exists between the words that are next to each other
                 return False
         return True 
 
@@ -93,8 +93,8 @@ def _adjacent(word1, word2):
     else: 
         for i in range(len(word1)):#given a range and let it run one by one
             if word1[i]!=word2[i]:# if the letter in the words is not the same, then it means that there is a difference 
-               df=df+1 #keep adding one
-    if df ==1:#needs to only have 1 differrence
-        return True
-    else:
-        return False 
+                df=df+1 #keep adding one
+        if df ==1:#needs to only have 1 differrence
+            return True
+         else:
+            return False 
