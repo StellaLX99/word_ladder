@@ -1,37 +1,43 @@
 #!/bin/python3
-from collections import deque
-from copy import copy,deepcopy
-filename= dictionary_file='words5.dict'
-with open (filename) as dic:
-    wholewords= dic.read().split("\n")
-    wholewords=set(wholewords)
-#print('words=',words) 
+     
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
 # stack=[]creates a list/stack that is empty
 # you want to check word by word,make sure there's only one difference between the words, and the difference is only one. the letter will exit the words if being replaced, aka being popped off and will establish to a new stack
 # and it is from left to right, the rightest one is the top of the stack, first in last out, last in , first out   
-    s=[]
+    from collections import deque
+    from copy import copy,deepcopy
+    dic = open(dictionary_file)
+    wholewords= dic.read().split("\n")
+    wholewords=set(wholewords)
+    s= []  
     s.append(start_word) #adding the first word together
-    q =deque() 
+    q = deque() 
     q.append(s)#recursion,build upon, first in, first out
-    if start_word== end_word:
-        return s
-    if len(q)==0: #if the queue is empty
-        return False 
-    while len(q)!=0:
+    if start_word == end_word:
+        return s 
+    while len(q)>0:
+       # print ('while loop goes in')
+        
         topstack=q.popleft() #queue is first in first out, from left to right
+       # print ('topstack= ', topstack) 
+
         for word in set(wholewords):
-            if _adjacent(topstack[-1],word): #run to see if only 1 difference, and next to each other
-                newwords=deepcopy(topstack) #we want to store it and go on
+            if _adjacent(word,topstack[-1])is True:
+               # print ('topstack[-1] ='  ,topstack[-1],'word = ',word) 
+                #run to see if only 1 difference, and next to each other
+                newwords = deepcopy(topstack) #we want to store it and go on
                 newwords.append(word) #add the rest of it in
-                if end_word==word: #here we finish basically
-                    for i in range(1, len(newwords)-2): # we start looping from the second word to the last second word
-                        if _adjacent(newwords[i-1],newwords[i+1]):
-                                newwords.pop(i) #get rid of the other words that is not at first and end 
+                if word == end_word: #here we finish basically
+                   # print ('finished')
+                     # we start looping from the second word to the last second word
+                 #get rid of the other words that is not at first and end 
                     return newwords
+                #print ('newwords = ', newwords)
                 q.append(newwords)
                 wholewords.remove(word)
     return None 
+
+                    
 
     '''
     Returns a list satisfying the following properties:
@@ -67,7 +73,7 @@ def verify_word_ladder(ladder):
     otherwise returns False.
     '''
 
-    if ladder == []: # it has to have multiple words to start with,cannot be empt 
+    if len(ladder) == 0: # it has to have multiple words to start with,cannot be empt 
         return False
     for i in range(len(ladder)-1):#given this range
         if not  _adjacent (ladder[i],ladder[i+1]):# using the helper function to see if only one difference exists between the words that are next to each other
@@ -91,10 +97,10 @@ def _adjacent(word1, word2):
         return False
     else: 
         for i in range(len(word1)):#given a range and let it run one by one
-            if word1[i]!=word2[i]:# if the letter in the words is not the same, then it means that there is a difference 
+            if word1[i]!= word2[i]:# if the letter in the words is not the same, then it means that there is a difference 
                 df=df+1 #keep adding one
         if df ==1:#needs to only have 1 differrence
             return True
         else:
             return False
-        #
+        
